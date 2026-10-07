@@ -33,9 +33,16 @@ export function replaceBetweenMarkers(readme: string, table: string): string {
 	return `${readme.slice(0, start + START.length)}\n${table}\n${readme.slice(end)}`
 }
 
-function main(): void {
+/** Rewrites the plugin table in README.md. Returns the README's path so a caller can stage it. */
+export function updateReadme(): string {
+	const readmePath = join(ROOT, "README.md")
+	writeFileSync(readmePath, replaceBetweenMarkers(readFileSync(readmePath, "utf8"), renderTable(pluginRows())))
+	return readmePath
+}
+
+function pluginRows(): PluginRow[] {
 	const marketplace = readJson(MARKETPLACE_PATH, Marketplace)
-	const rows = marketplace.plugins.map((entry) => {
+	return marketplace.plugins.map((entry) => {
 		const manifest = readPlugin(entry.name)
 		return {
 			name: entry.name,
@@ -45,17 +52,19 @@ function main(): void {
 			startsEnabled: manifest.defaultEnabled !== false,
 		}
 	})
-	const readmePath = join(ROOT, "README.md")
-	const current = readFileSync(readmePath, "utf8")
-	const next = replaceBetweenMarkers(current, renderTable(rows))
-	if (process.argv.includes("--check")) {
-		if (next !== current) {
-			console.error("README.md plugin table is out of date. Run: pnpm readme")
-			process.exit(1)
-		}
+}
+
+function main(): void {
+	if (!process.argv.includes("--check")) {
+		updateReadme()
 		return
 	}
-	writeFileSync(readmePath, next)
+	const readmePath = join(ROOT, "README.md")
+	const current = readFileSync(readmePath, "utf8")
+	if (replaceBetweenMarkers(current, renderTable(pluginRows())) !== current) {
+		console.error("README.md plugin table is out of date. Run: pnpm readme")
+		process.exit(1)
+	}
 }
 
 if (isMain(import.meta.url)) main()

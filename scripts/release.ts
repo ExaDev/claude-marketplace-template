@@ -1,6 +1,7 @@
 import { isMain } from "./lib/is-main.ts"
 import { existsSync, readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
+import { updateReadme } from "./generate-readme.ts"
 import { prependSection, formatSection } from "./lib/changelog.ts"
 import { highestLevel, parseCommit, releaseLevel, type ParsedCommit, type ReleaseLevel } from "./lib/conventional.ts"
 import { commitsTouching, git, latestTag, type RawCommit } from "./lib/git.ts"
@@ -95,7 +96,8 @@ function main(): void {
 		console.log(`${label} (${plan.level}, ${plan.commits.length} commits)`)
 		if (dryRun) continue
 		const files = unit.write(plan.next, formatSection(plan.next, date, plan.commits))
-		git(["add", "--", ...files])
+		// The README's plugin table shows each version, and the pre-commit check rejects a stale one.
+		git(["add", "--", ...files, updateReadme()])
 		git(["commit", "-m", `${RELEASE_PREFIX}${label}`])
 		git(["tag", "-a", label, "-m", label])
 		released += 1
