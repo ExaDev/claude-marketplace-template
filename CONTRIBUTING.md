@@ -54,3 +54,8 @@ You do not need a software background. Git keeps every change to every file as a
 ### Guardrails
 
 Claude is told not to run `git add -A`, `git add .` or anything with `--no-verify`, through the deny rules in `.claude/settings.json`. If you use another tool, follow the same rules yourself.
+
+### Gotchas
+
+- Some global gitignore files exclude `.claude/`, `CLAUDE.md` and `AGENTS.md`. Those files are tracked here on purpose, so a new one needs `git add -f <path>`, by name.
+- `pnpm install` sets up the commit hooks through husky's `prepare` script. If your package manager is configured to skip lifecycle scripts, run `pnpm exec husky` once, or rely on CI, which runs every check anyway.
