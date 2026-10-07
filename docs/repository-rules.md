@@ -4,6 +4,8 @@ The ruleset in `.github/rulesets/main.json` protects `main`: no deletion, no for
 
 Rulesets are repository settings, so they do not come across when a repository is created from a template. Apply it once per repository.
 
+**Plan requirement.** Rulesets and branch protection on a private repository need a paid GitHub plan (Team or higher for an organisation). On a free organisation the API answers `403 Upgrade to GitHub Pro or make this repository public`, and a private marketplace there has no enforced protection: CI still runs, but nothing makes the checks required. Public repositories can use rulesets on any plan.
+
 ## Why these rules
 
 - **Rebase merge only.** Each commit's type decides a plugin's release, so history has to keep the individual commits. A squash merge collapses them into one.
