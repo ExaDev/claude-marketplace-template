@@ -1,0 +1,35 @@
+{
+  "name": "claude-marketplace-template",
+  "private": true,
+  "type": "module",
+  "description": "A template for a Claude Code plugin marketplace repository, with one example plugin for every component type.",
+  "license": "MIT",
+  "packageManager": "pnpm@12.4.1",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test \"scripts/**/*.test.ts\" \"plugins/**/*.test.mjs\"",
+    "readme": "tsx scripts/generate-readme.ts",
+    "readme:check": "tsx scripts/generate-readme.ts --check",
+    "validate": "tsx scripts/validate-plugins.ts",
+    "release": "tsx scripts/release.ts",
+    "release:dry-run": "tsx scripts/release.ts --dry-run",
+    "init:marketplace": "tsx scripts/init.ts",
+    "commitlint": "commitlint",
+    "check": "pnpm typecheck && pnpm test && pnpm readme:check && pnpm validate",
+    "release:baseline": "tsx scripts/tag-baselines.ts"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "21.2.3",
+    "@commitlint/config-conventional": "21.2.3",
+    "@commitlint/types": "21.2.3",
+    "@types/node": "26.6.4",
+    "husky": "9.1.7",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "zod": "4.6.5"
+  }
+}
