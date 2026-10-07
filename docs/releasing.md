@@ -35,10 +35,19 @@ The release commit has to reach `main`, which the [ruleset](repository-rules.md)
 
 1. Generate a key pair and add the public half to the repository's deploy keys with write access.
 2. Store the private half as the repository secret `RELEASE_DEPLOY_KEY`.
-3. Add the deploy key as a bypass actor on the `main` ruleset.
+3. Apply the `main` ruleset, which already lets deploy keys bypass it (see [repository rules](repository-rules.md)).
 4. Set the repository variable `RELEASE_ENABLED` to `true`.
 
-Minting the key and adding the secret are done by a person with admin rights; nothing in this repository does them.
+Creating the key and storing the secret need repository admin rights. These commands do it without writing the private key anywhere you would later forget about:
+
+```bash
+keydir=$(mktemp -d)
+ssh-keygen -t ed25519 -N "" -C "release" -f "$keydir/key" >/dev/null
+gh repo deploy-key add "$keydir/key.pub" --allow-write --title release -R <org>/<repo>
+gh secret set RELEASE_DEPLOY_KEY -R <org>/<repo> < "$keydir/key"
+gh variable set RELEASE_ENABLED --body true -R <org>/<repo>
+rm -rf "$keydir"
+```
 
 ## When a plugin is renamed or removed
 

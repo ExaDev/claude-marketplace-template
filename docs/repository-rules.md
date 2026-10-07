@@ -23,4 +23,4 @@ gh api repos/<org>/<repo>/rulesets --jq '.[] | [.id, .name] | @tsv'
 gh api --method PUT repos/<org>/<repo>/rulesets/<id> --input .github/rulesets/main.json
 ```
 
-Then confirm it took effect by opening a pull request that fails a check, and by trying to push to `main` directly. If you use the [release workflow](releasing.md), add its deploy key to `bypass_actors` so it can push the release commit.
+Then confirm it took effect by opening a pull request that fails a check, and by trying to push to `main` directly. The ruleset lets deploy keys bypass it (`actor_type` `DeployKey`), which is how the [release workflow](releasing.md) pushes its release commit: any deploy key with write access can push to `main`, so add one only for the release workflow and keep its private half in the `RELEASE_DEPLOY_KEY` secret.
