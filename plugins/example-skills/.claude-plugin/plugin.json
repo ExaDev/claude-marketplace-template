@@ -1,0 +1,16 @@
+{
+  "name": "example-skills",
+  "version": "0.1.0",
+  "description": "Skills: a skill with a bundled reference file, called as a namespaced slash command.",
+  "author": {
+    "name": "ExaDev",
+    "url": "https://github.com/ExaDev"
+  },
+  "homepage": "https://github.com/ExaDev/claude-marketplace-template/tree/main/plugins/example-skills",
+  "repository": "https://github.com/ExaDev/claude-marketplace-template",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "example"
+  ]
+}

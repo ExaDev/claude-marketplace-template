@@ -1,0 +1,8 @@
+[
+  {
+    "name": "heartbeat",
+    "command": "\"${CLAUDE_PLUGIN_ROOT}\"/scripts/heartbeat.sh",
+    "description": "A line every ten seconds for a minute",
+    "when": "on-skill-invoke:start-heartbeat"
+  }
+]

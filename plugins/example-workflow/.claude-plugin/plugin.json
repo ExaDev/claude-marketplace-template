@@ -1,0 +1,17 @@
+{
+  "name": "example-workflow",
+  "version": "0.1.0",
+  "description": "Workflow: a script that fans out one subagent per README and collects the results.",
+  "author": {
+    "name": "ExaDev",
+    "url": "https://github.com/ExaDev"
+  },
+  "homepage": "https://github.com/ExaDev/claude-marketplace-template/tree/main/plugins/example-workflow",
+  "repository": "https://github.com/ExaDev/claude-marketplace-template",
+  "license": "MIT",
+  "keywords": [
+    "workflow",
+    "example"
+  ],
+  "defaultEnabled": false
+}

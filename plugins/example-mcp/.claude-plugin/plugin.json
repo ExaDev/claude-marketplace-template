@@ -1,0 +1,16 @@
+{
+  "name": "example-mcp",
+  "version": "0.1.0",
+  "description": "MCP server: a dependency-free stdio server that exposes one tool.",
+  "author": {
+    "name": "ExaDev",
+    "url": "https://github.com/ExaDev"
+  },
+  "homepage": "https://github.com/ExaDev/claude-marketplace-template/tree/main/plugins/example-mcp",
+  "repository": "https://github.com/ExaDev/claude-marketplace-template",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "example"
+  ]
+}

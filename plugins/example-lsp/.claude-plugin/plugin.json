@@ -1,0 +1,17 @@
+{
+  "name": "example-lsp",
+  "version": "0.1.0",
+  "description": "LSP server: connects a language server so Claude sees diagnostics after edits.",
+  "author": {
+    "name": "ExaDev",
+    "url": "https://github.com/ExaDev"
+  },
+  "homepage": "https://github.com/ExaDev/claude-marketplace-template/tree/main/plugins/example-lsp",
+  "repository": "https://github.com/ExaDev/claude-marketplace-template",
+  "license": "MIT",
+  "keywords": [
+    "lsp",
+    "example"
+  ],
+  "defaultEnabled": false
+}

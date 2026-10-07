@@ -1,0 +1,16 @@
+{
+  "name": "example-agents",
+  "version": "0.1.0",
+  "description": "Agents: a read-only subagent with its own instructions, model and tool access.",
+  "author": {
+    "name": "ExaDev",
+    "url": "https://github.com/ExaDev"
+  },
+  "homepage": "https://github.com/ExaDev/claude-marketplace-template/tree/main/plugins/example-agents",
+  "repository": "https://github.com/ExaDev/claude-marketplace-template",
+  "license": "MIT",
+  "keywords": [
+    "agents",
+    "example"
+  ]
+}

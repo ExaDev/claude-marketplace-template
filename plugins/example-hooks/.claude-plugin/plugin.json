@@ -1,0 +1,17 @@
+{
+  "name": "example-hooks",
+  "version": "0.1.0",
+  "description": "Hooks: a session-start reminder and a guard that stops unsafe git commands.",
+  "author": {
+    "name": "ExaDev",
+    "url": "https://github.com/ExaDev"
+  },
+  "homepage": "https://github.com/ExaDev/claude-marketplace-template/tree/main/plugins/example-hooks",
+  "repository": "https://github.com/ExaDev/claude-marketplace-template",
+  "license": "MIT",
+  "keywords": [
+    "hooks",
+    "guardrails",
+    "example"
+  ]
+}

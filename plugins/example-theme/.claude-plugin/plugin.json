@@ -1,0 +1,17 @@
+{
+  "name": "example-theme",
+  "version": "0.1.0",
+  "description": "Theme: a colour theme based on the dark preset.",
+  "author": {
+    "name": "ExaDev",
+    "url": "https://github.com/ExaDev"
+  },
+  "homepage": "https://github.com/ExaDev/claude-marketplace-template/tree/main/plugins/example-theme",
+  "repository": "https://github.com/ExaDev/claude-marketplace-template",
+  "license": "MIT",
+  "keywords": [
+    "theme",
+    "example"
+  ],
+  "defaultEnabled": false
+}

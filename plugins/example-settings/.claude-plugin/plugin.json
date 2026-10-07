@@ -1,0 +1,18 @@
+{
+  "name": "example-settings",
+  "version": "0.1.0",
+  "description": "Settings: runs one of the plugin's own agents as the main thread.",
+  "author": {
+    "name": "ExaDev",
+    "url": "https://github.com/ExaDev"
+  },
+  "homepage": "https://github.com/ExaDev/claude-marketplace-template/tree/main/plugins/example-settings",
+  "repository": "https://github.com/ExaDev/claude-marketplace-template",
+  "license": "MIT",
+  "keywords": [
+    "settings",
+    "agent",
+    "example"
+  ],
+  "defaultEnabled": false
+}

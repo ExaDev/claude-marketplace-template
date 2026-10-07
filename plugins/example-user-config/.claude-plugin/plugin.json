@@ -1,0 +1,25 @@
+{
+  "name": "example-user-config",
+  "version": "0.1.0",
+  "description": "User configuration: a value the user is asked for when the plugin is enabled.",
+  "author": {
+    "name": "ExaDev",
+    "url": "https://github.com/ExaDev"
+  },
+  "homepage": "https://github.com/ExaDev/claude-marketplace-template/tree/main/plugins/example-user-config",
+  "repository": "https://github.com/ExaDev/claude-marketplace-template",
+  "license": "MIT",
+  "keywords": [
+    "userConfig",
+    "configuration",
+    "example"
+  ],
+  "userConfig": {
+    "greeting": {
+      "type": "string",
+      "title": "Greeting",
+      "description": "What the greet skill should say",
+      "default": "Hello"
+    }
+  }
+}

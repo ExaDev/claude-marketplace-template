@@ -1,0 +1,16 @@
+{
+  "name": "example-commands",
+  "version": "0.1.0",
+  "description": "Commands: a flat Markdown slash command that takes an argument.",
+  "author": {
+    "name": "ExaDev",
+    "url": "https://github.com/ExaDev"
+  },
+  "homepage": "https://github.com/ExaDev/claude-marketplace-template/tree/main/plugins/example-commands",
+  "repository": "https://github.com/ExaDev/claude-marketplace-template",
+  "license": "MIT",
+  "keywords": [
+    "commands",
+    "example"
+  ]
+}

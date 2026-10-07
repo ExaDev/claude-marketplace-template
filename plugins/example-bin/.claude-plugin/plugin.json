@@ -1,0 +1,17 @@
+{
+  "name": "example-bin",
+  "version": "0.1.0",
+  "description": "Executable: a script on the Bash tool's PATH while the plugin is enabled.",
+  "author": {
+    "name": "ExaDev",
+    "url": "https://github.com/ExaDev"
+  },
+  "homepage": "https://github.com/ExaDev/claude-marketplace-template/tree/main/plugins/example-bin",
+  "repository": "https://github.com/ExaDev/claude-marketplace-template",
+  "license": "MIT",
+  "keywords": [
+    "bin",
+    "executable",
+    "example"
+  ]
+}

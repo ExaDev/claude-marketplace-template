@@ -1,0 +1,17 @@
+{
+  "name": "example-monitors",
+  "version": "0.1.0",
+  "description": "Monitor: a background command whose output reaches Claude as notifications.",
+  "author": {
+    "name": "ExaDev",
+    "url": "https://github.com/ExaDev"
+  },
+  "homepage": "https://github.com/ExaDev/claude-marketplace-template/tree/main/plugins/example-monitors",
+  "repository": "https://github.com/ExaDev/claude-marketplace-template",
+  "license": "MIT",
+  "keywords": [
+    "monitor",
+    "example"
+  ],
+  "defaultEnabled": false
+}

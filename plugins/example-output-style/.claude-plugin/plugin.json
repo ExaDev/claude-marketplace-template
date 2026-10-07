@@ -1,0 +1,17 @@
+{
+  "name": "example-output-style",
+  "version": "0.1.0",
+  "description": "Output style: replies that avoid jargon and lead with the answer.",
+  "author": {
+    "name": "ExaDev",
+    "url": "https://github.com/ExaDev"
+  },
+  "homepage": "https://github.com/ExaDev/claude-marketplace-template/tree/main/plugins/example-output-style",
+  "repository": "https://github.com/ExaDev/claude-marketplace-template",
+  "license": "MIT",
+  "keywords": [
+    "output-style",
+    "example"
+  ],
+  "defaultEnabled": false
+}

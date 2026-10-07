@@ -1,0 +1,16 @@
+{
+  "name": "marketplace-maintainer",
+  "version": "0.1.0",
+  "description": "Meta-tooling for working inside this marketplace repository: add, validate and release plugins.",
+  "author": {
+    "name": "ExaDev",
+    "url": "https://github.com/ExaDev"
+  },
+  "homepage": "https://github.com/ExaDev/claude-marketplace-template/tree/main/plugins/marketplace-maintainer",
+  "repository": "https://github.com/ExaDev/claude-marketplace-template",
+  "license": "MIT",
+  "keywords": [
+    "maintenance",
+    "marketplace"
+  ]
+}

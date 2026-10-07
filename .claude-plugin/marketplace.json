@@ -1,0 +1,98 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-marketplace.json",
+  "name": "example-marketplace",
+  "owner": {
+    "name": "ExaDev",
+    "url": "https://github.com/ExaDev"
+  },
+  "metadata": {
+    "description": "A template marketplace with one example plugin for every Claude Code plugin component type",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "example-skills",
+      "source": "./plugins/example-skills",
+      "description": "Skills: a skill with a bundled reference file, called as a namespaced slash command.",
+      "category": "skills"
+    },
+    {
+      "name": "example-agents",
+      "source": "./plugins/example-agents",
+      "description": "Agents: a read-only subagent with its own instructions, model and tool access.",
+      "category": "agents"
+    },
+    {
+      "name": "example-commands",
+      "source": "./plugins/example-commands",
+      "description": "Commands: a flat Markdown slash command that takes an argument.",
+      "category": "commands"
+    },
+    {
+      "name": "example-hooks",
+      "source": "./plugins/example-hooks",
+      "description": "Hooks: a session-start reminder and a guard that stops unsafe git commands.",
+      "category": "hooks"
+    },
+    {
+      "name": "example-mcp",
+      "source": "./plugins/example-mcp",
+      "description": "MCP server: a dependency-free stdio server that exposes one tool.",
+      "category": "mcp"
+    },
+    {
+      "name": "example-lsp",
+      "source": "./plugins/example-lsp",
+      "description": "LSP server: connects a language server so Claude sees diagnostics after edits.",
+      "category": "lsp"
+    },
+    {
+      "name": "example-output-style",
+      "source": "./plugins/example-output-style",
+      "description": "Output style: replies that avoid jargon and lead with the answer.",
+      "category": "output-styles"
+    },
+    {
+      "name": "example-theme",
+      "source": "./plugins/example-theme",
+      "description": "Theme: a colour theme based on the dark preset.",
+      "category": "themes"
+    },
+    {
+      "name": "example-monitors",
+      "source": "./plugins/example-monitors",
+      "description": "Monitor: a background command whose output reaches Claude as notifications.",
+      "category": "monitors"
+    },
+    {
+      "name": "example-workflow",
+      "source": "./plugins/example-workflow",
+      "description": "Workflow: a script that fans out one subagent per README and collects the results.",
+      "category": "workflows"
+    },
+    {
+      "name": "example-bin",
+      "source": "./plugins/example-bin",
+      "description": "Executable: a script on the Bash tool's PATH while the plugin is enabled.",
+      "category": "executables"
+    },
+    {
+      "name": "example-settings",
+      "source": "./plugins/example-settings",
+      "description": "Settings: runs one of the plugin's own agents as the main thread.",
+      "category": "settings"
+    },
+    {
+      "name": "example-user-config",
+      "source": "./plugins/example-user-config",
+      "description": "User configuration: a value the user is asked for when the plugin is enabled.",
+      "category": "configuration"
+    },
+    {
+      "name": "marketplace-maintainer",
+      "source": "./plugins/marketplace-maintainer",
+      "description": "Meta-tooling for working inside this marketplace repository: add, validate and release plugins.",
+      "category": "maintenance"
+    }
+  ]
+}
