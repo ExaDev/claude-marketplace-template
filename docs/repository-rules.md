@@ -26,3 +26,15 @@ gh api --method PUT repos/<org>/<repo>/rulesets/<id> --input .github/rulesets/ma
 ```
 
 Then confirm it took effect by opening a pull request that fails a check, and by trying to push to `main` directly. The ruleset lets deploy keys bypass it (`actor_type` `DeployKey`), which is how the [release workflow](releasing.md) pushes its release commit: any deploy key with write access can push to `main`, so add one only for the release workflow and keep its private half in the `RELEASE_DEPLOY_KEY` secret.
+
+## Without rulesets: merge-when-green
+
+On a private repository on a free plan there is no ruleset, no required status check and no GitHub auto-merge. [ExaDev/merge-when-green](https://github.com/ExaDev/merge-when-green) does the waiting instead: a pull request labelled `automerge` is merged once one named check has passed on its head commit, it is not a draft and it has no unresolved review thread. Nothing stops a person merging by hand; the action only saves waiting.
+
+Set it up once per repository:
+
+1. Make one job that passes only when the others did, named `Required checks`: it `needs` every job, runs with `if: always()`, and fails unless each result is `success`. A job's check name is its id unless it sets `name`, so set `name: Required checks`, or the action reports the check as missing.
+2. Add a workflow that runs the action on `workflow_run` (when your CI workflow completes) and on `pull_request_target` (`labeled`, `ready_for_review`), with `merge-method: fast-forward`, `update-behind: true`, `ssh-key` set to the release deploy key and `required-check: Required checks`. It must not check out pull request code. The full example is in the action's README.
+3. Create the `automerge` label.
+
+A fast-forward push with a deploy key keeps each commit (the history the release script reads) and, unlike a push made with `GITHUB_TOKEN`, starts the release workflow. The workflow file has to be on the default branch before it can act on a pull request, so the pull request that adds it is merged by hand.
