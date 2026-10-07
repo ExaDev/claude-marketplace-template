@@ -1,6 +1,7 @@
 import { isMain } from "./lib/is-main.ts"
+import { renderMarketplaceReadme } from "./lib/marketplace-readme.ts"
 import { execFileSync } from "node:child_process"
-import { existsSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs"
+import { existsSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 import { parseArgs } from "node:util"
 import {
@@ -15,11 +16,8 @@ import {
 	writeJson,
 } from "./lib/manifests.ts"
 
-const TEMPLATE_REPO = "ExaDev/claude-marketplace-template"
 const TEMPLATE_NAME = "example-marketplace"
 const RESERVED_PREFIXES = ["claude-", "anthropic-", "anthropics-", "cc-plugin-"]
-const TEXT_EXTENSIONS = [".md", ".json", ".yml", ".yaml", ".ts", ".mjs"]
-const SKIPPED = new Set([".git", "node_modules"])
 
 /** A marketplace name is lower-case letters, digits and hyphens, and must not pass as one of Anthropic's own. */
 export function validMarketplaceName(name: string): string | undefined {
@@ -28,17 +26,8 @@ export function validMarketplaceName(name: string): string | undefined {
 	return undefined
 }
 
-export function replaceAll(text: string, replacements: ReadonlyArray<readonly [string, string]>): string {
-	return replacements.reduce((out, [from, to]) => out.split(from).join(to), text)
-}
-
-function textFiles(dir: string): string[] {
-	return readdirSync(dir).flatMap((entry) => {
-		if (SKIPPED.has(entry)) return []
-		const path = join(dir, entry)
-		if (statSync(path).isDirectory()) return textFiles(path)
-		return TEXT_EXTENSIONS.some((ext) => path.endsWith(ext)) ? [path] : []
-	})
+function pluginMarkdown(): string[] {
+	return pluginNames().map((plugin) => join(PLUGINS_DIR, plugin, "README.md")).filter((path) => existsSync(path))
 }
 
 function main(): void {
@@ -67,13 +56,14 @@ function main(): void {
 	}
 	const slug = `${org}/${repo}`
 
-	// Text first, so every reference to the template becomes a reference to this marketplace.
-	for (const path of textFiles(ROOT)) {
+	writeFileSync(
+		join(ROOT, "README.md"),
+		renderMarketplaceReadme({ name, owner, slug, description: description ?? `Claude Code plugins from ${owner}`, license: values.license }),
+	)
+	// Example plugins that are kept refer to the template's marketplace name in their install lines.
+	for (const path of pluginMarkdown()) {
 		const before = readFileSync(path, "utf8")
-		const after = replaceAll(before, [
-			[TEMPLATE_REPO, slug],
-			[TEMPLATE_NAME, name],
-		])
+		const after = before.split(`@${TEMPLATE_NAME}`).join(`@${name}`)
 		if (after !== before) writeFileSync(path, after)
 	}
 
