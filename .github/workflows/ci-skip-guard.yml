@@ -1,0 +1,32 @@
+name: CI skip guard
+
+# A skip token in a pull request's commits makes GitHub skip the workflows, so the required checks
+# never report and the pull request is blocked with nothing to fix. pull_request_target is never
+# skipped, so this check still reports. It runs the base branch's code and reads the pull request's
+# commit messages as data: the pull request's own code is never checked out or run.
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, edited]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  ci-skip-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Fetch the pull request's commit messages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api "repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/commits" --paginate --jq '[.[].commit.message]' | jq -s 'add' > "$RUNNER_TEMP/messages.json"
+      - run: pnpm exec tsx scripts/check-ci-skip-tokens.ts "$RUNNER_TEMP/messages.json"

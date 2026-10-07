@@ -1,0 +1,37 @@
+name: Release
+
+# Releases each plugin whose commits ask for one (see docs/releasing.md). Off until the repository
+# variable RELEASE_ENABLED is "true", because it needs the RELEASE_DEPLOY_KEY secret and a ruleset
+# that lets that key push to main.
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    if: ${{ vars.RELEASE_ENABLED == 'true' && !startsWith(github.event.head_commit.message, 'chore(release):') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          ssh-key: ${{ secrets.RELEASE_DEPLOY_KEY }}
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - run: pnpm release
+      - run: git push --follow-tags origin HEAD:main
